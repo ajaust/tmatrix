@@ -1,5 +1,6 @@
 #include "TMatrix.hpp"
 #include <algorithm>
+#include <array>
 #include <iterator>
 #include <vector>
 
@@ -17,19 +18,19 @@ std::vector<T> concat(const std::vector<T>& A, const std::vector<T>& B)
 
 }  // namespace
 
-static const std::vector<double> static_alphas[] = {
+static const std::array<std::vector<double>, 4> static_alphas = {{
     {.9, .1},             // DUAL_POR_MOSTLY_ROUNDED
     {.58, .027},          // DUAL_POR_LITTLE_ROUNDED
     {.9, .1, 1e-2},       // MIXED_PORES
     {.9, .1, 1e-2, 1e-3}  // FLAT_PORES_AND_CRACK
-};
+}};
 
-static const std::vector<double> static_vs[] = {
+static const std::array<std::vector<double>, 4> static_vs = {{
     {.9, .1},               // DUAL_POR_MOSTLY_ROUNDED
     {.85, .15},             // DUAL_POR_LITTLE_ROUNDED
     {.8, .19, 1e-2},        // MIXED_PORES
     {.689, .3, 1e-2, 1e-3}  // FLAT_PORES_AND_CRACK
-};
+}};
 
 TMatrix_Porosity::TMatrix_Porosity(double per_inc_con, double per_inc_ani,
                                    size_t len)
